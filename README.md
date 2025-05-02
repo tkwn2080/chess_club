@@ -1,5 +1,3 @@
-![ap8510100244-1726075f58d7fd928d17f0df51b61a97a2a70afc](https://github.com/user-attachments/assets/3b3f8d0e-dedd-4643-b52a-4923db9fa0ca)
-
 # Chess Neural Network Competition Framework
 
 A minimal framework for developing and testing chess neural networks in competitive settings.
@@ -10,6 +8,8 @@ This repository contains everything needed to:
 1. Generate a training dataset from high-level chess games (2200+ Elo)
 2. Provide a simple UI for pitting neural networks against each other or human players
 3. Connect your own chess neural network using any ML framework
+
+![ap8510100244-1726075f58d7fd928d17f0df51b61a97a2a70afc](https://github.com/user-attachments/assets/3b3f8d0e-dedd-4643-b52a-4923db9fa0ca)
 
 ## Getting Started
 
