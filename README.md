@@ -1,6 +1,6 @@
-# Chess Neural Network Competition Framework
+# Chess Club for Neural Networks
 
-A minimal framework for developing and testing chess neural networks in competitive settings.
+Both parties are given the same database, they have one hour to build and train a neural network to play chess.
 
 ## Overview
 
