@@ -24,16 +24,17 @@ pip install -r requirements.txt
 
 ### Generating Training Data
 
-Run the data generation script to download and filter a chess database:
+Run the data generation script to download and process a chess database:
 
 ```bash
 python data.py
 ```
 
 This will:
-- Download a lightweight chess database from Lichess
-- Filter for games with players rated 2200+ Elo
-- Create processed data files ready for training
+1. Automatically download the Lichess database from September 2014 (~600MB)
+2. Extract and process games where both players are rated 2200+ Elo
+3. Create training data files ready for neural network training
+4. Process up to 100,000 high-rated games
 
 ### Playing Games
 
@@ -135,11 +136,31 @@ For a competition between two neural networks:
 
 ## Data Format
 
-The data.py script generates these files:
+The data.py script generates three files in the `data/` directory:
 
-- `games.pgn`: Raw PGN files from filtered games
-- `positions.csv`: Board positions with evaluation scores  
-- `train.npz`: Processed data in numpy format ready for training
+### 1. `games.pgn`
+Raw PGN files from filtered games (both players 2200+ Elo)
+
+### 2. `positions.csv`
+Board positions with the following columns:
+- `fen`: Board state in FEN notation
+- `next_move`: Next move in UCI format (e.g., "e2e4")
+- `result`: Game outcome (1=white wins, -1=black wins, 0=draw)
+- `turn`: Side to move ('w' or 'b')
+
+### 3. `train.npz`
+NumPy arrays ready for neural network training:
+- `X`: Board states as 768-dimensional vectors (shape: [n_positions, 768])
+  - Each position: 64 squares × 12 piece types (6 pieces × 2 colors)
+  - Binary encoding: 1 if piece present, 0 otherwise
+- `y_move`: Next moves in UCI format (list of strings)
+  - Needs conversion to numerical format for NN training
+- `y_value`: Game outcomes from current player's perspective (numpy array)
+  - +1: Current player wins
+  - 0: Draw
+  - -1: Current player loses
+
+Note: The data includes positions from all game phases (opening, middlegame, endgame), sampling every other move to reduce dataset size while maintaining game flow.
 
 ## Customization
 
